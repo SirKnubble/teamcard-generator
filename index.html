@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NRC - Teammember Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="form">
+        <label
+          >Profile Picture:
+          <input
+            type="url"
+            id="profileImageUrlInput"
+            placeholder="https://example.com/image.png"
+        /><input type="file" accept="image/*" id="profileImageInput"/>
+        </label>
+        <label
+          >Name: <input type="text" id="nameInput" placeholder="Max Mustermann"
+        /></label>
+        <label
+          >Discord Username:
+          <input type="text" id="cardDiscordInput" placeholder="@username"
+        /></label>
+        <label
+          >Rolle:
+          <select id="roleInput">
+            <option value="BugHunter">BugHunter</option>
+            <option value="Helper">Helper</option>
+            <option value="Designer">Designer</option>
+            <option value="Developer">Developer</option>
+          </select>
+        </label>
+        <label>Beitrittsdatum: <input type="date" id="joinDateInput" /></label>
+        <label>Austrittsdatum: <input type="date" id="leaveDateInput" /></label>
+        <label <label
+          >Hintergrund:
+          <select id="bgSelect">
+            <option value="assets/backgrounds/default.jpg">Standard</option>
+            <option value="assets/backgrounds/bug_hunter.png">Bug Hunter</option>
+            <option value="assets/backgrounds/default.png">Helper</option>
+            <option value="assets/backgrounds/default.png">Designer</option>
+            <option value="assets/backgrounds/default.png">Developer</option>
+          </select>
+        </label>
+        <label
+          >Eigenes Banner:
+          <input type="file" accept="image/*" id="bannerUpload"
+        /></label>
+        <button id="saveBtn">Download</button>
+        <a
+          id="downloadLink"
+          class="download-link"
+          href="#"
+          download="karte.png"
+          style="display: none"
+          >Download-Link</a
+        >
+      </div>
+
+      <div class="card-preview" id="card">
+        <div class="card-banner" id="cardBanner"></div>
+        <div class="card-content">
+          <img
+            id="cardImage"
+            src="assets/icons/default.png"
+            alt="Profilbild"
+          />
+          <div class="card-role-icon">
+            <i id="roleIcon"></i>
+            <h2 id="cardName">Max Mustermann</h2>
+          </div>
+          <div class="card-id" id="cardId">ID-00123</div>
+          <span id="cardRole">BugHunter</span>
+          <p id="cardDates">01.01.2022 – 01.01.2023</p>
+        </div>
+        <div class="card-footer" id="cardFooter">@NoRiskClient</div>
+      </div>
+    </div>
+  </body>
+</html>
