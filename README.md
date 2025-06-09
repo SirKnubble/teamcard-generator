@@ -1,5 +1,5 @@
 # team-card-generator
-Generator to create Teamcards for former NRC Teammember.
+Generator to create Teamcards for former NRC-Team members.
 
 ToDo:
 - Custom Role Icons (assets/icons)

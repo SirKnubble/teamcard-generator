@@ -1,86 +1,196 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NRC - Teammember Card</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
-    <link rel="stylesheet" href="/index.css">
-  </head>
-  <body>
-    <div class="container">
-      <div class="form">
-        <label
-          >Profile Picture:
-          <input
-            type="url"
-            id="profileImageUrlInput"
-            placeholder="https://example.com/image.png"
-        /><input type="file" accept="image/*" id="profileImageInput"/>
-        </label>
-        <label
-          >Name: <input type="text" id="nameInput" placeholder="Max Mustermann"
-        /></label>
-        <label
-          >Discord Username:
-          <input type="text" id="cardDiscordInput" placeholder="@username"
-        /></label>
-        <label
-          >Rolle:
-          <select id="roleInput">
-            <option value="BugHunter">BugHunter</option>
-            <option value="Helper">Helper</option>
-            <option value="Designer">Designer</option>
-            <option value="Developer">Developer</option>
-          </select>
-        </label>
-        <label>Beitrittsdatum: <input type="date" id="joinDateInput" /></label>
-        <label>Austrittsdatum: <input type="date" id="leaveDateInput" /></label>
-        <label <label
-          >Hintergrund:
-          <select id="bgSelect">
-            <option value="assets/backgrounds/default.jpg">Standard</option>
-            <option value="assets/backgrounds/bug_hunter.png">Bug Hunter</option>
-            <option value="assets/backgrounds/default.png">Helper</option>
-            <option value="assets/backgrounds/default.png">Designer</option>
-            <option value="assets/backgrounds/default.png">Developer</option>
-          </select>
-        </label>
-        <label
-          >Eigenes Banner:
-          <input type="file" accept="image/*" id="bannerUpload"
-        /></label>
-        <button id="saveBtn">Download</button>
-        <a
-          id="downloadLink"
-          class="download-link"
-          href="#"
-          download="karte.png"
-          style="display: none"
-          >Download-Link</a
-        >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teammitglied Karte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <link href="index.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="form">
+      <label>Banner:
+        <select id="bgSelect">
+          <option value="assets/backgrounds/default.jpg">Standard</option>
+          <option value="assets/backgrounds/bughunter.png">BugHunter</option>
+          <option value="assets/backgrounds/helper.png">Helper</option>
+          <option value="assets/backgrounds/designer.png">Designer</option>
+          <option value="assets/backgrounds/developer.png">Developer</option>
+        </select>
+      </label>
+      <label>Custom Banner:</label>
+      <div class="row">
+        <input type="file" accept="image/*" id="bannerUpload">
+        <input type="url" id="bannerUrlInput" placeholder="https://example.de/img.png">
       </div>
+      <label>Profilbild:</label>
+      <div class="row">
+        <input type="file" accept="image/*" id="profileImageInput" title="Upload Profile Picture">
+        <input type="url" id="profileImageUrlInput" placeholder="https://example.de/img.png">
+      </div>
+      <label>Name: <input type="text" id="nameInput" placeholder="Username"></label>
+      <label>Discord: <input type="text" id="discordInput" placeholder="@Discord"></label>
+      <label>Rolle:
+        <select id="roleInput">
+          <option value="BugHunter">BugHunter</option>
+          <option value="Helper">Helper</option>
+          <option value="Designer">Designer</option>
+          <option value="Developer">Developer</option>
+        </select>
+      </label>
+      <label>Beitrittsdatum: <input type="date" id="joinDateInput"></label>
+      <label>Austrittsdatum: <input type="date" id="leaveDateInput"></label>
+      <button id="saveBtn">Als PNG speichern</button>
+      <a id="downloadLink" class="download-link" href="#" download="nrc-team.png" style="display: none;">Download-Link zur Karte</a>
+    </div>
 
-      <div class="card-preview" id="card">
-        <div class="card-banner" id="cardBanner"></div>
-        <div class="card-content">
-          <img
-            id="cardImage"
-            src="assets/icons/default.png"
-            alt="Profilbild"
-          />
-          <div class="card-role-icon">
-            <i id="roleIcon"></i>
-            <h2 id="cardName">Max Mustermann</h2>
-          </div>
-          <div class="card-id" id="cardId">ID-00123</div>
-          <span id="cardRole">BugHunter</span>
-          <p id="cardDates">01.01.2022 – 01.01.2023</p>
+    <div class="card-preview" id="card">
+      <div class="card-banner" id="cardBanner"></div>
+      <div class="card-content">
+        <img id="cardImage" src="assets/icons/default.png" alt="Profilbild">
+        <div class="card-role-icon">
+          <img id="roleIcon" src="assets/icons/default.png" alt="icon">
+          <h2 id="cardName">Username</h2>
         </div>
-        <div class="card-footer" id="cardFooter">@NoRiskClient</div>
+        <div class="card-discord" id="cardDiscord">@Discord</div>
+        <span id="cardRole">BugHunter</span>
+        <p id="cardDates">01.01.2022 – 01.01.2023</p>
+        <p class="card-discord" id="cardDays">0 Tage im Team</p>
+      </div>
+      <div class="card-footer" id="cardFooter">
+        NoRiskClient
       </div>
     </div>
-  </body>
+  </div>
+
+  <script>
+    const nameInput = document.getElementById('nameInput');
+    const roleInput = document.getElementById('roleInput');
+    const joinDateInput = document.getElementById('joinDateInput');
+    const leaveDateInput = document.getElementById('leaveDateInput');
+    const profileImageInput = document.getElementById('profileImageInput');
+    const profileImageUrlInput = document.getElementById('profileImageUrlInput');
+    const discordInput = document.getElementById('discordInput');
+    const bgSelect = document.getElementById('bgSelect');
+    const bannerUpload = document.getElementById('bannerUpload');
+
+    const cardName = document.getElementById('cardName');
+    const cardRole = document.getElementById('cardRole');
+    const roleIcon = document.getElementById('roleIcon');
+    const cardDates = document.getElementById('cardDates');
+    const cardImage = document.getElementById('cardImage');
+    const cardDiscord = document.getElementById('cardDiscord');
+    const cardFooter = document.getElementById('cardFooter');
+    const cardBanner = document.getElementById('cardBanner');
+
+    const saveBtn = document.getElementById('saveBtn');
+    const downloadLink = document.getElementById('downloadLink');
+
+    const roleSettings = {
+      BugHunter: { icon: 'assets/icons/bughunter.png', color: '#d3bb23', bg: 'assets/backgrounds/bughunter.png' },
+      Helper: { icon: 'assets/icons/helper.png', color: '#3afc30', bg: 'assets/backgrounds/helper.png' },
+      Designer: { icon: 'assets/icons/designer.png', color: '#3498db', bg: 'assets/backgrounds/designer.png' },
+      Developer: { icon: 'assets/icons/developer.png', color: '#a1dde0', bg: 'assets/backgrounds/developer.png' }
+    };
+
+    function updateRoleUI(role) {
+      cardRole.textContent = role;
+      cardName.style.color = roleSettings[role].color;
+      roleIcon.src = roleSettings[role].icon;
+      cardBanner.style.backgroundImage = `url('${roleSettings[role].bg}')`;
+    }
+
+    nameInput.addEventListener('input', () => {
+      cardName.textContent = nameInput.value || 'Username';
+    });
+
+    roleInput.addEventListener('change', () => {
+      const role = roleInput.value;
+      updateRoleUI(role);
+    });
+
+    discordInput.addEventListener('input', () => {
+      cardDiscord.textContent = discordInput.value || '@discord';
+    });
+
+    joinDateInput.addEventListener('input', updateDates);
+    leaveDateInput.addEventListener('input', updateDates);
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('de-DE');
+    }
+
+    function updateDates() {
+      const join = joinDateInput.value ? new Date(joinDateInput.value) : null;
+      const leave = leaveDateInput.value ? new Date(leaveDateInput.value) : null;
+    
+      const joinStr = join ? formatDate(join.toISOString()) : '??.??.????';
+      const leaveStr = leave ? formatDate(leave.toISOString()) : '??.??.????';
+      cardDates.textContent = `${joinStr} – ${leaveStr}`;
+    
+      const days = (join && leave) ? Math.max((0, Math.ceil((leave - join) / (1000 * 60 * 60 * 24))) +1 ) : 0;
+      document.getElementById('cardDays').textContent = `${days} Tage im Team`;
+    }    
+
+    profileImageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        cardImage.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    profileImageUrlInput.addEventListener('input', () => {
+      if (!profileImageInput.files.length) {
+        cardImage.src = profileImageUrlInput.value  || 'https://example.com/image.png';
+      }
+    });
+
+    bgSelect.addEventListener('change', () => {
+      cardBanner.style.backgroundImage = `url('${bgSelect.value}')`;
+    });
+
+    bannerUpload.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        cardBanner.style.backgroundImage = `url('${reader.result}')`;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    saveBtn.addEventListener('click', () => {
+      const card = document.getElementById('card');
+      const clone = card.cloneNode(true);
+      const computedStyle = window.getComputedStyle(card);
+      //Setup computed style
+      clone.style.backgroundColor = computedStyle.backgroundColor;
+      clone.style.borderRadius = computedStyle.borderRadius;
+      clone.style.boxShadow = computedStyle.boxShadow;
+      clone.style.overflow = "hidden";
+
+      clone.style.position = "fixed";
+      clone.style.left = "-9999px";
+
+      document.body.appendChild(clone);
+
+      html2canvas(clone, { backgroundColor: null }).then(canvas => {
+        const link = document.createElement("a");
+        downloadLink.download = "nrc-team.png";
+        downloadLink.href = canvas.toDataURL('image/png');
+        downloadLink.style.display = 'inline-block';
+        downloadLink.click();
+        document.body.removeChild(clone);
+      });
+    });
+
+    updateRoleUI(roleInput.value);
+  </script>
+</body>
 </html>
